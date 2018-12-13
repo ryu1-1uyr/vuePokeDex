@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <img src="../Pokemon-DB/img/025Pikachu.png">
+    <input type="number" v-model="dexNumber" style="background-color: ghostwhite">
+    <button v-on:click="setPokemon()" style="background-color: black"></button>
+    <p>{{dexNumber}}</p>
+    <p>{{pokemonData}}</p>
     <router-view/>
   </div>
 </template>
@@ -10,7 +14,7 @@
 
   import pokeJSON from '../Pokemon-DB/pokedex'
 
-  console.log(pokeJSON);
+  console.log(pokeJSON[0]);
 
   export default {
     name: 'App',
@@ -18,10 +22,14 @@
       return {
         name: "",
         type: "",
-        denNumber: ""
+        dexNumber: "",
+        pokemonData: ""
       }
     },
     methods: {
+      setPokemon () {
+        this.pokemonData = pokeJSON[this.dexNumber]
+      },
       }
 
   }
