@@ -48,10 +48,16 @@
       }
     },
     methods : {
-      getPokemon () {
-        axios.get(this.url+this.dexNumber+"/")
-          .then((res)=>{
+      async getPokemon () {
+
+        const res = await axios.get(this.url+this.dexNumber+"/");
+
+          if (res.status !== 200) {
+            this.error = "データが取得できませんでした"
+          } else {
+
             console.log(res["data"])
+
 
             this.type = res["data"]["types"][0]["type"]["name"]
 
@@ -72,7 +78,9 @@
             this.back_shiny  = res["data"]["sprites"]["back_shiny"]
 
             this.img = this.front
-          })
+
+          }
+
         // .then((json)=>{console.log(json)})
       },
       setPokemonId () {
