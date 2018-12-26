@@ -2,7 +2,11 @@
   <div id="app">
     <img :src="img" v-on:mouseover="over()" v-on:mouseleave="leave()" v-on:click="colored()">
     <h1>{{name}}</h1>
-    <input type="text" v-model="name" placeholder="ポケモンの名前〜〜">
+    <input type="text" v-model="name" placeholder="ポケモンの名前〜〜" autocomplete="on" list="pokemons">
+    <datalist id="pokemons">
+      <option v-for="pokename in pokeList" :value="pokename" />
+    </datalist>
+
     <button type="button" v-on:click="setPokemonId()">ＢＯＴＡＮＮ</button>
     <p>{{ type }}</p>
     <p>{{ type2 }}</p>
@@ -20,7 +24,7 @@
 
   console.log(poke.getName(1,'ja'))
 
-  const pokeList = poke.all('ja')
+  let pokeList = poke.all('ja')
 
   export default {
     name: 'App',
@@ -39,7 +43,8 @@
         back_shiny: "",
         dexNumber: "",
         pokemonData: "",
-        url: "https://pokeapi.co/api/v2/pokemon/"
+        url: "https://pokeapi.co/api/v2/pokemon/",
+        pokeList : poke.all('ja')
       }
     },
     methods : {
