@@ -64,7 +64,6 @@
             if (res["data"]["types"][1]) {
               this.type2 = res["data"]["types"][1]["type"]["name"]
             } else {
-              console.log("unchi")
               this.type2 = ""
             }
 
@@ -115,7 +114,11 @@
 
     }
   }
+
+
+
 </script>
+
 
 <style>
   #app {
