@@ -112,7 +112,16 @@
             this.front_shiny = res["data"]["sprites"]["front_shiny"]
             this.back_shiny  = res["data"]["sprites"]["back_shiny"]
 
-            this.pieChartData.datasets.data
+            this.pieChartData.datasets[0].data[0] = res["data"]["stats"][5]["base_stat"],
+            this.pieChartData.datasets[0].data[1] = res["data"]["stats"][4]["base_stat"],
+            this.pieChartData.datasets[0].data[2] = res["data"]["stats"][3]["base_stat"],
+            this.pieChartData.datasets[0].data[3] = res["data"]["stats"][2]["base_stat"],
+            this.pieChartData.datasets[0].data[4] = res["data"]["stats"][1]["base_stat"],
+            this.pieChartData.datasets[0].data[5] = res["data"]["stats"][0]["base_stat"]
+
+            // console.log(this.options)
+
+            this.mounted();
 
             this.img = this.front
 
@@ -146,7 +155,10 @@
       },
       colored() {
         this.img = this.front_shiny
-      }
+      },
+      mounted() {
+        this.renderChart(this.pieChartData, this.options)
+      },
 
 
 
