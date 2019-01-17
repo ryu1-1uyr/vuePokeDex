@@ -17,7 +17,7 @@
 
     <div style="background-color: gainsboro;">
       <h3>円グラフを描画する</h3>
-      <PieChart style="width: 60%;" :data="pieChartData" :options="options"></PieChart>
+      <PieChart :data="pieChartData" :options="options"></PieChart>
     </div>
 
   </div>
@@ -59,16 +59,18 @@
 
         pieChartData : {
           // ラベル
-          labels: ["天領", "薩摩", "長州", "土佐"],
+          labels: ["HP", "攻撃", "防御", "特攻","特防","素早さ"],
           // データ詳細
           datasets: [{
             label: '藩と人口',
-            data: [13740000, 9072000, 7150000, 6148000],
+            data: [100, 100, 200, 100,300,100],
             backgroundColor: [
-              'rgba(255, 100, 130, 0.2)',
-              'rgba(100, 130, 255, 0.2)',
-              'rgba(130, 255, 100, 0.2)',
-              'rgba(230, 210, 85, 0.2)'
+              'rgba(130, 255, 100, 0.2)',//green
+              'rgba(255, 100, 130, 0.2)',//red
+              'rgba(100, 130, 255, 0.2)',//bule
+              'rgba(230, 210, 85,  0.2)',//yellow
+              'rgba(153, 153, 153, 0.2)',//grey
+              'rgba(153, 255, 255, 0.2)'//light blue
             ]
           }]
         },
@@ -109,6 +111,8 @@
 
             this.front_shiny = res["data"]["sprites"]["front_shiny"]
             this.back_shiny  = res["data"]["sprites"]["back_shiny"]
+
+            this.pieChartData.datasets.data
 
             this.img = this.front
 
