@@ -141,7 +141,7 @@
           }
         }
         if (flag) {
-          this.error = "存在しないポケモンです"
+          this.error = "存在しないポケモンです。"
         } else {
           this.error = null
           this.getPokemon()
