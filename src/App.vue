@@ -17,7 +17,7 @@
 
     <div style="background-color: gainsboro;">
       <h3>円グラフを描画する</h3>
-      <PieChart :data="pieChartData" :options="options"></PieChart>
+      <PieChart :data="pieChartData" :options="options" ref="piechat"></PieChart>
     </div>
 
   </div>
@@ -126,6 +126,8 @@
 
           }
 
+          await this.update()
+
         // .then((json)=>{console.log(json)})
       },
       setPokemonId () {
@@ -155,7 +157,9 @@
       colored() {
         this.img = this.front_shiny
       },
-
+      update () {
+        this.$refs.piechat.update()
+      }
 
 
     }
