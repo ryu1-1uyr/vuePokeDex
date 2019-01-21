@@ -121,7 +121,6 @@
 
             // console.log(this.options)
 
-            this.mounted();
 
             this.img = this.front
 
@@ -155,9 +154,6 @@
       },
       colored() {
         this.img = this.front_shiny
-      },
-      mounted() {
-        this.renderChart(this.pieChartData, this.options)
       },
 
 
