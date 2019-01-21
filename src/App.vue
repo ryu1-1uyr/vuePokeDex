@@ -92,7 +92,7 @@
             this.error = "データが取得できませんでした"
           } else {
 
-            console.log(res["data"])
+            console.log(res["data"]);
 
 
             this.type = res["data"]["types"][0]["type"]["name"]
@@ -117,7 +117,7 @@
             this.pieChartData.datasets[0].data[2] = res["data"]["stats"][3]["base_stat"],
             this.pieChartData.datasets[0].data[3] = res["data"]["stats"][2]["base_stat"],
             this.pieChartData.datasets[0].data[4] = res["data"]["stats"][1]["base_stat"],
-            this.pieChartData.datasets[0].data[5] = res["data"]["stats"][0]["base_stat"]
+            this.pieChartData.datasets[0].data[5] = res["data"]["stats"][0]["base_stat"],
 
             // console.log(this.options)
 
