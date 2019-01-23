@@ -18,6 +18,7 @@
     <div style="background-color: gainsboro;">
       <h3>円グラフを描画する</h3>
       <PieChart :data="pieChartData" :options="options" ref="piechat"></PieChart>
+      <RadarChart :data="Radardata" :options="options" ref="radarchart"></RadarChart>
     </div>
 
   </div>
@@ -29,6 +30,7 @@
   import poke from 'pokemon'
 
   import PieChart from '@/components/chart/PieChart.vue'
+  import RadarChart from '@/components/chart/RadarChart.vue'
 
   console.log(poke.getName(1,'ja'))
 
@@ -37,7 +39,8 @@
   export default {
     name: 'App',
     components: {
-      PieChart
+      PieChart,
+      RadarChart
     },
     data () {
       return {
@@ -74,6 +77,23 @@
             ]
           }]
         },
+        Radardata: {
+          labels: ["HP", "攻撃", "防御","素早さ","特防", "特攻"],
+          datasets: [{
+            label: 'Aさん',
+            data: [92, 72, 86, 74, 86,100],
+            backgroundColor: 'RGBA(225,95,150, 0.5)',
+            borderColor: 'RGBA(225,95,150, 1)',
+            borderWidth: 1,
+            pointBackgroundColor: [
+              'rgba(130, 255, 100, 0.7)',//green
+              'rgba(255, 100, 130, 0.7)',//red
+              'rgba(100, 130, 255, 0.7)',//bule
+              'rgba(153, 255, 255, 0.7)',//light blue
+              'rgba(153, 153, 153, 0.7)',//grey
+              'rgba(230, 210, 85,  0.7)',//yellow
+            ]
+          }]},
         // グラフオプション
         options : {
           title: {
