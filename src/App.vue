@@ -3,6 +3,7 @@
     <img :src="img" v-on:mouseover="over()" v-on:mouseleave="leave()" v-on:click="colored()">
     <h1>{{name}}</h1>
     <input type="text" v-model="name" placeholder="ポケモンの名前〜〜" autocomplete="on" list="pokemons">
+    <!-- ここの実装死ぬほど重たいので直したい -->
     <datalist id="pokemons">
       <option v-for="pokename in pokeList" :value="pokename" />
     </datalist>
@@ -16,8 +17,7 @@
     <h1 style="color:red;">{{ error }}</h1>
 
     <div style="background-color: gainsboro;">
-      <h3>円グラフを描画する</h3>
-      <PieChart :data="pieChartData" :options="options" ref="piechat"></PieChart>
+      <h3>能力値</h3>
       <RadarChart :data="Radardata" :options="options" ref="radarchart"></RadarChart>
     </div>
 
@@ -29,7 +29,6 @@
   import axios from 'axios'
   import poke from 'pokemon'
 
-  import PieChart from '@/components/chart/PieChart.vue'
   import RadarChart from '@/components/chart/RadarChart.vue'
 
   console.log(poke.getName(1,'ja'))
@@ -39,7 +38,6 @@
   export default {
     name: 'App',
     components: {
-      PieChart,
       RadarChart
     },
     data () {
@@ -60,27 +58,10 @@
         url: "https://pokeapi.co/api/v2/pokemon/",
         pokeList : poke.all('ja'),
 
-        pieChartData : {
-          // ラベル
-          labels: ["HP", "攻撃", "防御", "特攻","特防","素早さ"],
-          // データ詳細
-          datasets: [{
-            label: '藩と人口',
-            data: [100, 100, 200, 100,300,100],
-            backgroundColor: [
-              'rgba(130, 255, 100, 0.2)',//green
-              'rgba(255, 100, 130, 0.2)',//red
-              'rgba(100, 130, 255, 0.2)',//bule
-              'rgba(230, 210, 85,  0.2)',//yellow
-              'rgba(153, 153, 153, 0.2)',//grey
-              'rgba(153, 255, 255, 0.2)'//light blue
-            ]
-          }]
-        },
         Radardata: {
           labels: ["HP", "攻撃", "防御","素早さ","特防", "特攻"],
           datasets: [{
-            label: 'Aさん',
+            label: "ポケモンの能力値",
             data: [92, 72, 86, 74, 86,100],
             backgroundColor: 'RGBA(225,95,150, 0.5)',
             borderColor: 'RGBA(225,95,150, 1)',
@@ -88,7 +69,7 @@
             pointBackgroundColor: [
               'rgba(130, 255, 100, 0.7)',//green
               'rgba(255, 100, 130, 0.7)',//red
-              'rgba(100, 130, 255, 0.7)',//bule
+              'rgba(100, 130, 255, 0.7)',//blue
               'rgba(153, 255, 255, 0.7)',//light blue
               'rgba(153, 153, 153, 0.7)',//grey
               'rgba(230, 210, 85,  0.7)',//yellow
@@ -98,9 +79,15 @@
         options : {
           title: {
             display: true,
-            text: '藩と人口'
-          },
-        }
+          },scale:{
+            ticks:{
+              suggestedMin: 0,
+              suggestedMax: 100,
+              stepSize: 10,
+              }
+            }
+          }
+
       }
     },
     methods : {
@@ -132,23 +119,23 @@
             this.front_shiny = res["data"]["sprites"]["front_shiny"]
             this.back_shiny  = res["data"]["sprites"]["back_shiny"]
 
-            this.pieChartData.datasets[0].data[0] = res["data"]["stats"][5]["base_stat"],
-            this.pieChartData.datasets[0].data[1] = res["data"]["stats"][4]["base_stat"],
-            this.pieChartData.datasets[0].data[2] = res["data"]["stats"][3]["base_stat"],
-            this.pieChartData.datasets[0].data[3] = res["data"]["stats"][2]["base_stat"],
-            this.pieChartData.datasets[0].data[4] = res["data"]["stats"][1]["base_stat"],
-            this.pieChartData.datasets[0].data[5] = res["data"]["stats"][0]["base_stat"],
+            this.Radardata.datasets[0].data[0] = res["data"]["stats"][5]["base_stat"],// h
+            this.Radardata.datasets[0].data[1] = res["data"]["stats"][4]["base_stat"],// a
+            this.Radardata.datasets[0].data[2] = res["data"]["stats"][3]["base_stat"],// b
+            this.Radardata.datasets[0].data[3] = res["data"]["stats"][0]["base_stat"],// s
+            this.Radardata.datasets[0].data[4] = res["data"]["stats"][2]["base_stat"],// c
+            this.Radardata.datasets[0].data[5] = res["data"]["stats"][1]["base_stat"],// d
 
-            // console.log(this.options)
+              //S D C B A H json
+
+              //["HP", "攻撃", "防御","素早さ","特防", "特攻"], dataset
 
 
-            this.img = this.front
+              this.img = this.front
 
           }
 
           await this.update()
-
-        // .then((json)=>{console.log(json)})
       },
       setPokemonId () {
         let flag = false
@@ -178,7 +165,7 @@
         this.img = this.front_shiny
       },
       update () {
-        this.$refs.piechat.update()
+        this.$refs.radarchart.update()
       }
 
 
