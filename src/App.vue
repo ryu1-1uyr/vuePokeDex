@@ -231,6 +231,6 @@
   .button {
     background-color: lightsteelblue;
     border-radius: 40px;
-    width: 60px;
+    /*width: 60px;*/
   }
 </style>
