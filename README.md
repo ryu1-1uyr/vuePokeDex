@@ -11,7 +11,7 @@ npm run dev <br>
 ### 主に使ってるやつ
 pokeapi <br>
 vue-chartjs <br>
-Vuetify.js  <br>
+VueSingleSelect  <br>
 
 
 ポケモンのDBはこちらのやつを使わせてもらってます [Pokemon-DB](https://github.com/fanzeyi/Pokemon-DB)

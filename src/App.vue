@@ -8,7 +8,7 @@
     ></VueSingleSelect>
 
     <button type="button" class="button" v-on:click="setPokemonId()">検索</button>
-    <button type="button" class="button" v-on:click="setPokemonId()">ランダム</button>
+    <button type="button" class="button" v-on:click="randomGetPokemon()">ランダム</button>
 
 
     <p>{{ type }}</p>
@@ -31,7 +31,6 @@
 
   import axios from 'axios'
   import poke from 'pokemon'
-  import Vuetify from 'vuetify'
   import VueSingleSelect from "vue-single-select";
 
   const firstPokemon = poke.random('ja')
@@ -165,8 +164,12 @@
         }
       },
       randomGetPokemon () {
+        const randomPokemon = poke.random('ja')
 
+        this.name = randomPokemon
+        this.dexNumber = poke.getId(randomPokemon,'ja')
 
+        this.getPokemon()
       },
       over() {
         this.img = this.back
@@ -203,7 +206,7 @@
     margin-top: 60px;
   }
   .button {
-    background-color: rgba(165,85,87,0.97);
+    background-color: lightsteelblue;
     border-radius: 40px;
     width: 60px;
   }
