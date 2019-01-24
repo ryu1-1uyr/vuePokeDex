@@ -7,7 +7,10 @@
       v-model="name"
     ></VueSingleSelect>
 
-    <button type="button" v-on:click="setPokemonId()">ＢＯＴＡＮＮ</button>
+    <button type="button" class="button" v-on:click="setPokemonId()">検索</button>
+    <button type="button" class="button" v-on:click="setPokemonId()">ランダム</button>
+
+
     <p>{{ type }}</p>
     <p>{{ type2 }}</p>
     <p>おもさ : {{weight}}</p>
@@ -31,11 +34,12 @@
   import Vuetify from 'vuetify'
   import VueSingleSelect from "vue-single-select";
 
+  const firstPokemon = poke.random('ja')
 
+  console.log(firstPokemon,poke.getId(firstPokemon,'ja'))
 
   import RadarChart from '@/components/chart/RadarChart.vue'
 
-  console.log(poke.getName(1,'ja'))
 
   let pokeList = poke.all('ja')
 
@@ -47,7 +51,7 @@
     },
     data () {
       return {
-        name: "",
+        name: firstPokemon,
         type: "",
         type2: "",
         error: "",
@@ -58,7 +62,7 @@
         back: "",
         front_shiny: "",
         back_shiny: "",
-        dexNumber: "",
+        dexNumber: poke.getId(firstPokemon,'ja'),
         pokemonData: "",
         url: "https://pokeapi.co/api/v2/pokemon/",
         pokeList : poke.all('ja'),
@@ -67,7 +71,7 @@
           labels: ["HP", "攻撃", "防御","素早さ","特防", "特攻"],
           datasets: [{
             label: "ポケモンの能力値",
-            data: [92, 72, 86, 74, 86,100],
+            data: [0, 0, 0, 0, 0, 0],
             backgroundColor: 'RGBA(225,95,150, 0.5)',
             borderColor: 'RGBA(225,95,150, 1)',
             borderWidth: 1,
@@ -160,6 +164,10 @@
           this.getPokemon()
         }
       },
+      randomGetPokemon () {
+
+
+      },
       over() {
         this.img = this.back
       },
@@ -174,7 +182,10 @@
       }
 
 
-    }
+    },
+    mounted: function(){
+      this.getPokemon()
+    },
   }
 
 
@@ -190,5 +201,10 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+  }
+  .button {
+    background-color: rgba(165,85,87,0.97);
+    border-radius: 40px;
+    width: 60px;
   }
 </style>
