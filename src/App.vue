@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h2 v-if="dexNumber">{{dexNumber}}</h2>
     <img :src="img" v-on:mouseover="over()" v-on:mouseleave="leave()" v-on:click="colored()">
     <h1>{{name}}</h1>
     <VueSingleSelect
@@ -11,17 +12,14 @@
     <button type="button" class="button" v-on:click="randomGetPokemon()">ランダム</button>
 
 
-    <p>{{ type }}</p>
-    <p>{{ type2 }}</p>
+    <p>{{ type  }}<span v-if="type2"> , {{ type2 }}</span> </p>
+
+
     <p>おもさ : {{weight}}</p>
     <p>たかさ : {{height}}</p>
-    <p>{{dexNumber}}</p>
-    <h1 style="color:red;">{{ error }}</h1>
+    <h1 style="color:red;" v-if="error">{{ error }}</h1>
 
-    <div style="background-color: gainsboro;">
-      <h3>能力値</h3>
-      <RadarChart :data="Radardata" :options="options" ref="radarchart"></RadarChart>
-    </div>
+    <RadarChart :data="Radardata" :options="options" ref="radarchart"></RadarChart>
 
 
   </div>
@@ -40,7 +38,28 @@
   import RadarChart from '@/components/chart/RadarChart.vue'
 
 
-  let pokeList = poke.all('ja')
+  const typeList = [
+    {'en':'normal','ja':'ノーマル'},
+    {'en':'fire','ja':'ほのお'},
+    {'en':'water','ja':'みず'},
+    {'en':'grass','ja':'くさ'},
+    {'en':'electric','ja':'でんき'},
+    {'en':'ice','ja':'こおり'},
+    {'en':'fighting','ja':'かくとう'},
+    {'en':'poison','ja':'どく'},
+    {'en':'ground','ja':'じめん'},
+    {'en':'flying','ja':'ひこう'},
+    {'en':'psychic','ja':'エスパー'},
+    {'en':'bug','ja':'むし'},
+    {'en':'rock','ja':'いわ'},
+    {'en':'ghost','ja':'ゴースト'},
+    {'en':'dragon','ja':'ドラゴン'},
+    {'en':'dark','ja':'あく'},
+    {'en':'steel','ja':'はがね'},
+    {'en':'fairy','ja':'フェアリー'}];
+
+
+  let pokeList = poke.all('ja');
 
   export default {
     name: 'App',
@@ -110,10 +129,11 @@
             console.log(res["data"]);
 
 
-            this.type = res["data"]["types"][0]["type"]["name"]
+            // this.type = res["data"]["types"][0]["type"]["name"]
 
+            this.type = typeList.filter(type => type['en'] == res["data"]["types"][0]["type"]["name"])[0]['ja']
             if (res["data"]["types"][1]) {
-              this.type2 = res["data"]["types"][1]["type"]["name"]
+              this.type2 = typeList.filter(type => type['en'] == res["data"]["types"][1]["type"]["name"])[0]['ja']
             } else {
               this.type2 = ""
             }
@@ -198,12 +218,15 @@
 
 <style>
   #app {
+    padding: 0;
+    margin: 0;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    /*margin-top: 60px;*/
+    background-color: gainsboro;
   }
   .button {
     background-color: lightsteelblue;
