@@ -14,4 +14,9 @@ vue-chartjs <br>
 VueSingleSelect  <br>
 
 
+## ほすてぃんぐ
+[githubpages](https://s17001.github.io/vuePokeDex/dist/#/)
+
+## その他
+
 ポケモンのDBはこちらのやつを使わせてもらってます [Pokemon-DB](https://github.com/fanzeyi/Pokemon-DB)
