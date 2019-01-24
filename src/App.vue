@@ -1,16 +1,22 @@
 <template>
-  <div id="app">
+  <div id="app" >
+    <div class="container">
+      <VueSingleSelect
+        class="search"
+        :options="pokeList"
+        v-model="name"
+      />
+      <button type="button" class="button" v-on:click="setPokemonId()">検索</button>
+      <button type="button" class="button" v-on:click="randomGetPokemon()">ランダム</button>
+
+      <div class="row">
+
+
+
+        <div class="col text">
     <h2 v-if="dexNumber">{{dexNumber}}</h2>
     <img :src="img" v-on:mouseover="over()" v-on:mouseleave="leave()" v-on:click="colored()">
     <h1>{{name}}</h1>
-    <VueSingleSelect
-      :options="pokeList"
-      v-model="name"
-    ></VueSingleSelect>
-
-    <button type="button" class="button" v-on:click="setPokemonId()">検索</button>
-    <button type="button" class="button" v-on:click="randomGetPokemon()">ランダム</button>
-
 
     <p>{{ type  }}<span v-if="type2"> , {{ type2 }}</span> </p>
 
@@ -19,9 +25,18 @@
     <p>たかさ : {{height}}</p>
     <h1 style="color:red;" v-if="error">{{ error }}</h1>
 
+        </div>
+
+        <div class="col">
+
     <RadarChart :data="Radardata" :options="options" ref="radarchart"></RadarChart>
 
+        </div>
 
+      </div>
+
+
+  </div>
   </div>
 </template>
 
@@ -227,10 +242,23 @@
     color: #2c3e50;
     /*margin-top: 60px;*/
     background-color: gainsboro;
+    height: 100%;
   }
   .button {
     background-color: lightsteelblue;
     border-radius: 40px;
     /*width: 60px;*/
+  }
+  .search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .text {
+    position:relative;
+  }
+  .text p h2 h1 img {
+    position:absolute;
+
   }
 </style>
