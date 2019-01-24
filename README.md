@@ -8,5 +8,10 @@ cd vuePokeDex <br>
 npm install <br>
 npm run dev <br>
 
+### 主に使ってるやつ
+pokeapi <br>
+vue-chartjs <br>
+Vuetify.js  <br>
+
 
 ポケモンのDBはこちらのやつを使わせてもらってます [Pokemon-DB](https://github.com/fanzeyi/Pokemon-DB)
