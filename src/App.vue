@@ -2,11 +2,10 @@
   <div id="app">
     <img :src="img" v-on:mouseover="over()" v-on:mouseleave="leave()" v-on:click="colored()">
     <h1>{{name}}</h1>
-    <input type="text" v-model="name" placeholder="ポケモンの名前〜〜" autocomplete="on" list="pokemons">
-    <!-- ここの実装死ぬほど重たいので直したい -->
-    <datalist id="pokemons">
-      <option v-for="pokename in pokeList" :value="pokename" />
-    </datalist>
+    <VueSingleSelect
+      :options="pokeList"
+      v-model="name"
+    ></VueSingleSelect>
 
     <button type="button" v-on:click="setPokemonId()">ＢＯＴＡＮＮ</button>
     <p>{{ type }}</p>
@@ -21,6 +20,7 @@
       <RadarChart :data="Radardata" :options="options" ref="radarchart"></RadarChart>
     </div>
 
+
   </div>
 </template>
 
@@ -28,6 +28,10 @@
 
   import axios from 'axios'
   import poke from 'pokemon'
+  import Vuetify from 'vuetify'
+  import VueSingleSelect from "vue-single-select";
+
+
 
   import RadarChart from '@/components/chart/RadarChart.vue'
 
@@ -38,7 +42,8 @@
   export default {
     name: 'App',
     components: {
-      RadarChart
+      RadarChart,
+      VueSingleSelect
     },
     data () {
       return {
