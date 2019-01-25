@@ -215,6 +215,7 @@ export default {
 }
 .text {
   position:relative;
+  margin-top: 4%;
 }
 .text p h2 h1 img {
   position:absolute;
