@@ -20,3 +20,5 @@ VueSingleSelect  <br>
 ### その他
 
 ポケモンのDBはこちらのやつを使わせてもらってます [Pokemon-DB](https://github.com/fanzeyi/Pokemon-DB)
+
+
